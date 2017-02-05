@@ -1,5 +1,7 @@
 var express = require('express'),
-	bodyParser = require('body-parser')
+	bodyParser = require('body-parser'),
+	shuffle = require('./shuffle.js').shuffle,
+	randomize_aux = require('./randomize_aux.js')
 
 var app = express()
 
@@ -10,6 +12,8 @@ if (!VERIFY_TOKEN) {
   process.exit(1)
 }
 
+var KEY_CHARACTER = ','
+
 
 app.get('/', function (req, res) {
 	res.send('<!-- !-->')
@@ -18,13 +22,15 @@ app.get('/', function (req, res) {
 // RANDOMIZE
 function randomize (req, res) {
 	var answer = {
-		    "text": "It's 80 degrees right now.",
+		    "text": "Smultron ha hablado. El orden random es:",
 		    "attachments": [
 		        {
-		            "text":"JSON: "+JSON.stringify(req.body)
+		            "text": ""
 		        }
 		    ]
 		}
+	var elems = shuffle(req.body.text.split(KEY_CHARACTER))
+	answer.text = randomize_aux.printList(elems)
 	res.send(answer)
 }
 app.route('/randomize')
