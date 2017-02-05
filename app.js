@@ -11,7 +11,7 @@ function randomize (req, res) {
 		    "text": "It's 80 degrees right now.",
 		    "attachments": [
 		        {
-		            "text":"JSON: "+JSON.stringify(req.params)
+		            "text":"JSON: "+JSON.stringify(req.query)
 		        }
 		    ]
 		}
