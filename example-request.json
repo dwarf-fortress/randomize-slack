@@ -1,0 +1,12 @@
+{
+   "token":"",
+   "team_id":"Z0ZZ0ZZZ0",
+   "team_domain":"smultronpotencia",
+   "channel_id":"Z0ZZZZZZZ",
+   "channel_name":"directmessage",
+   "user_id":"Z0ZZ0ZZZZ",
+   "user_name":"sejas",
+   "command":"/randomize",
+   "text":"\"item1\" \"item2\"",
+   "response_url":"https://hooks.slack.com/commands/Z0ZZ0ZZZ0/00000000000/0ZZzZ0zZZZzZ0ZzzZzzZ0zZ0"
+}
