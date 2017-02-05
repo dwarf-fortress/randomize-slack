@@ -33,7 +33,7 @@ function randomize (req, res) {
 		    ]
 		}
 	var elems = shuffle(req.body.text.split(KEY_CHARACTER))
-	answer.attachments.text = randomize_aux.printList(elems)
+	answer.attachments[0].text = randomize_aux.printList(elems)
 	res.send(answer)
 }
 app.route('/randomize')
