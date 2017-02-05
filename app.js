@@ -2,7 +2,7 @@ var express = require('express')
 var app = express()
 
 app.get('/', function (req, res) {
-	res.send('Hello World!')
+	res.send('<!-- !-->')
 })
 
 // RANDOMIZE
@@ -11,7 +11,7 @@ function randomize (req, res) {
 		    "text": "It's 80 degrees right now.",
 		    "attachments": [
 		        {
-		            "text":"JSON: "+JSON.stringify(req.body)
+		            "text":"JSON: "+JSON.stringify(req.params)
 		        }
 		    ]
 		}
