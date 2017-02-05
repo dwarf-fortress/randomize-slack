@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/dwarf-fortress/randomize-slack#readme",
   "dependencies": {
+    "body-parser": "^1.16.0",
     "express": "^4.14.1"
   }
 }
