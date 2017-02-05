@@ -3,6 +3,8 @@
 // function clean(arrayOfStrings) {
 //  return arrayOfStrings.map(function(e){return e.trim()});
 // }
+// exports.clean = clean;
+
 
 function printList(arrayOfStrings) {
   var i = 0
@@ -19,5 +21,4 @@ function printList(arrayOfStrings) {
   return aux.join(" \n");
 }
 
-exports.clean = clean;
 exports.printList = printList;
