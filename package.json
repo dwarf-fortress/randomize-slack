@@ -1,0 +1,27 @@
+{
+  "name": "randomize",
+  "version": "1.0.0",
+  "description": "Slack bot to randomize strings",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwarf-fortress/randomize-slack.git"
+  },
+  "keywords": [
+    "slack",
+    "dwarf-fortress",
+    "random"
+  ],
+  "author": "Sejas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dwarf-fortress/randomize-slack/issues"
+  },
+  "homepage": "https://github.com/dwarf-fortress/randomize-slack#readme",
+  "dependencies": {
+    "express": "^4.14.1"
+  }
+}
