@@ -18,5 +18,29 @@ function shuffle(array) {
 
   return array;
 }
-
 exports.shuffle = shuffle;
+
+
+
+/**
+*
+* assigningShuffled
+*
+**/
+function randomIndexFromArray(a) {
+  return Math.floor(a.length * Math.random())
+}
+function randomElementFromArray(a) {
+  return a[randomIndexFromArray(a)]
+}
+function assigningShuffled(a) {
+  var copyAux = a.slice()
+  var result = {}
+  for (var i = 0; i < a.length; i++) {
+    var randomI = randomIndexFromArray(copyAux)
+    result[a[i]] = copyAux[randomI]
+    copyAux.splice(randomI, 1)
+  }
+  return result;
+}
+exports.assigningShuffled = assigningShuffled;

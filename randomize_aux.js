@@ -22,3 +22,19 @@ function printList(arrayOfStrings) {
 }
 
 exports.printList = printList;
+
+/**
+*
+*
+*
+**/
+function objectToListToPrint(objectOfAssigned) {
+  var a = [],
+      i = 0
+  for (var key in objectOfAssigned) {
+    a[i++] = key+' =====>    '+objectOfAssigned[key]
+  }
+  return a
+}
+
+exports.objectToListToPrint = objectToListToPrint;

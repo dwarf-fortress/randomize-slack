@@ -1,6 +1,7 @@
 var express = require('express'),
 	bodyParser = require('body-parser'),
 	shuffle = require('./shuffle.js').shuffle,
+	assigningShuffled = require('./shuffle.js').assigningShuffled,
 	randomize_aux = require('./randomize_aux.js')
 
 var app = express()
@@ -39,6 +40,28 @@ function randomize (req, res) {
 app.route('/randomize')
   .get(randomize)
   .post(bodyParser.urlencoded({ extended: true }),randomize)
+
+
+// RANDOMIZE AND ASSIGN
+function randomizeAndAssign (req, res) {
+	var answer = {
+			"response_type": "in_channel",
+		    "text": "Smultron ha hablado. El orden random es:",
+		    "attachments": [
+		        {
+		            "text": ""
+		        }
+		    ]
+		}
+	var elems = shuffle(req.body.text.split(KEY_CHARACTER))
+	var result = assigningShuffled(elems)
+	var arrayToPrint = randomize_aux.objectToListToPrint(result)
+	answer.attachments[0].text = randomize_aux.printList(arrayToPrint)
+	res.send(answer)
+}
+app.route('/randomizeAndAssign')
+	.get(randomize)
+	.post(bodyParser.urlencoded({ extended: true }),randomizeAndAssign)
 
 
 var port = process.env.PORT || 8080;
