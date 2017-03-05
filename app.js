@@ -73,7 +73,9 @@ function randomizeAndAssign (req, res) {
 		var asignandoJugador = jugadoresRandomized[i]
 		var partidas_filtradas_y_random = shuffle(partidasPorAsignar.filter(function(p){return p!= ultimoEstadoJugadorPartida[asignandoJugador]}))
 		result['Jugador '+asignandoJugador] = 'git checkout '+partidas_filtradas_y_random[0]
-		partidasPorAsignar = partidasPorAsignar.slice(1) //remove first partida
+		//remove
+		var index = partidasPorAsignar.indexOf(partidas_filtradas_y_random[0])
+		partidasPorAsignar = partidasPorAsignar.slice(index,1) //remove first partida
 	}
 	var arrayToPrint = randomize_aux.objectToListToPrint(result)
 	answer.attachments[0].text = randomize_aux.printList(arrayToPrint)
