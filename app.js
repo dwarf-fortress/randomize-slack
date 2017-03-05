@@ -65,24 +65,25 @@ function randomizeAndAssign (req, res) {
 		        }
 		    ]
 		}
+	var logText	= ""
 	var ultimoEstadoJugadorPartida = lastsInverse(turnos)
-	answer.attachments[0].text += "\n"+'ultimoEstadoJugadorPartida: '+JSON.stringify(ultimoEstadoJugadorPartida)
+	logText += "\n"+'ultimoEstadoJugadorPartida: '+JSON.stringify(ultimoEstadoJugadorPartida)
 	var jugadoresRandomized = shuffle(jugadores)
-	answer.attachments[0].text += "\n"+'jugadoresRandomized: '+JSON.stringify(jugadoresRandomized)
+	logText += "\n"+'jugadoresRandomized: '+JSON.stringify(jugadoresRandomized)
 	var partidasPorAsignar = partidas.slice()
-	answer.attachments[0].text += "\n"+'partidasPorAsignar: '+JSON.stringify(partidasPorAsignar)
+	logText += "\n"+'partidasPorAsignar: '+JSON.stringify(partidasPorAsignar)
 	var result = {}
 	for (var i = 0; i < jugadoresRandomized.length; i++) {
 		var asignandoJugador = jugadoresRandomized[i]
-		answer.attachments[0].text += "\n"+'asignandoJugador i: '+i+' '+JSON.stringify(asignandoJugador)
+		logText += "\n"+'asignandoJugador i: '+i+' '+JSON.stringify(asignandoJugador)
 		var partidas_filtradas_y_random = shuffle(partidasPorAsignar.filter(function(p){return p!= ultimoEstadoJugadorPartida[asignandoJugador]}))
-		answer.attachments[0].text += "\n"+'partidas_filtradas_y_random: '+JSON.stringify(partidas_filtradas_y_random)
+		logText += "\n"+'partidas_filtradas_y_random: '+JSON.stringify(partidas_filtradas_y_random)
 		result['Jugador '+asignandoJugador] = 'git checkout '+partidas_filtradas_y_random[0]
 		//remove
 		var index = partidasPorAsignar.indexOf(partidas_filtradas_y_random[0])
-		answer.attachments[0].text += "\n"+'index: '+JSON.stringify(index)
+		logText += "\n"+'index: '+JSON.stringify(index)
 		partidasPorAsignar.splice(index,1) //remove partida asignada
-		answer.attachments[0].text += "\n"+'partidasPorAsignar: '+JSON.stringify(partidasPorAsignar)
+		logText += "\n"+'partidasPorAsignar: '+JSON.stringify(partidasPorAsignar)
 	}
 	var arrayToPrint = randomize_aux.objectToListToPrint(result)
 	answer.attachments[0].text += randomize_aux.printList(arrayToPrint)
