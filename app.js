@@ -2,9 +2,19 @@ var express = require('express'),
 	bodyParser = require('body-parser'),
 	shuffle = require('./shuffle.js').shuffle,
 	assigningShuffled = require('./shuffle.js').assigningShuffled,
-	randomize_aux = require('./randomize_aux.js')
+	randomize_aux = require('./randomize_aux.js'),
+	lasts = require('./lasts.js').lasts
 
 var app = express()
+
+var jugadores = ["alvaro", "antonio", "edu", "ferrer", "sergio"]
+var turnos = {
+edu: ["edu", "ferrer", "sergio"],
+pitufos: ["ferrer", "sergio", "edu"],
+sejas: ["antonio", "edu", "ferrer"],
+Alvaro: ["alvaro", "antonio", "alvaro"],
+Sillonball: ["sergio", "alvaro", "antonio"]
+}
 
 //Try the command for heroku: heroku config:set SLACK_VERIFY_TOKEN=adsfasdfasdf
 //for mac os : export SLACK_VERIFY_TOKEN=adsfasdfasdf
@@ -53,6 +63,7 @@ function randomizeAndAssign (req, res) {
 		        }
 		    ]
 		}
+	var 
 	var elems = shuffle(req.body.text.split(KEY_CHARACTER))
 	var result = assigningShuffled(elems)
 	var arrayToPrint = randomize_aux.objectToListToPrint(result)
@@ -60,8 +71,31 @@ function randomizeAndAssign (req, res) {
 	res.send(answer)
 }
 app.route('/randomizeAndAssign')
-	.get(randomize)
+	.get(randomizeAndAssign)
 	.post(bodyParser.urlencoded({ extended: true }),randomizeAndAssign)
+
+// getLasts
+function getLasts(req, res) {
+	var answer = {
+			"response_type": "in_channel",
+		    "text": "Smultron recuerda que los jugadores actuales son:",
+		    "attachments": [
+		        {
+		            "text": ""
+		        }
+		    ]
+		}
+	var ultimoEstado = lasts(turnos)
+	arrayToPrint = {}
+	for (var partida in ultimoEstado ) {
+		arrayToPrint['Jugador '+ultimoEstado[partida]+''] = 'git checkout '+partida
+	}
+	answer.attachments[0].text = randomize_aux.objectToListToPrint(arrayToPrint)
+	res.send(answer)
+}
+app.route('/lasts')
+	.get(getLasts)
+	.post(bodyParser.urlencoded({ extended: true }),getLasts)
 
 
 var port = process.env.PORT || 8080;
