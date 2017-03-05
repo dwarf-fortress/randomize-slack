@@ -10,11 +10,11 @@ var app = express()
 
 var jugadores = ["alvaro", "antonio", "edu", "ferrer", "sergio"]
 var turnos = {
-edu: ["edu", "ferrer", "sergio"],
-pitufos: ["ferrer", "sergio", "edu"],
-sejas: ["antonio", "edu", "ferrer"],
-Alvaro: ["alvaro", "antonio", "alvaro"],
-Sillonball: ["sergio", "alvaro", "antonio"]
+edu: ["edu", "ferrer", "sergio", "alvaro"],
+pitufos: ["ferrer", "sergio", "edu", "antonio"],
+sejas: ["antonio", "edu", "ferrer", "edu"],
+Alvaro: ["alvaro", "antonio", "alvaro", "ferrer"],
+Sillonball: ["sergio", "alvaro", "antonio", "sergio"]
 }
 var partidas = Object.keys(turnos)
 
@@ -58,7 +58,7 @@ app.route('/randomize')
 function randomizeAndAssign (req, res) {
 	var answer = {
 			"response_type": "in_channel",
-		    "text": "Smultron ha hablado. El orden random es:",
+		    "text": "Smultron ha hablado. El orden random para el turno "+turnos['Alvaro'].length+" es:",
 		    "attachments": [
 		        {
 		            "text": ""
