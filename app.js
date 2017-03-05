@@ -4,6 +4,7 @@ var express = require('express'),
 	assigningShuffled = require('./shuffle.js').assigningShuffled,
 	randomize_aux = require('./randomize_aux.js'),
 	lasts = require('./lasts.js').lasts
+	lastsInverse = require('./lasts.js').lastsInverse
 
 var app = express()
 
@@ -15,6 +16,7 @@ sejas: ["antonio", "edu", "ferrer"],
 Alvaro: ["alvaro", "antonio", "alvaro"],
 Sillonball: ["sergio", "alvaro", "antonio"]
 }
+var partidas = Object.keys(turnos)
 
 //Try the command for heroku: heroku config:set SLACK_VERIFY_TOKEN=adsfasdfasdf
 //for mac os : export SLACK_VERIFY_TOKEN=adsfasdfasdf
@@ -63,9 +65,16 @@ function randomizeAndAssign (req, res) {
 		        }
 		    ]
 		}
-	var 
-	var elems = shuffle(req.body.text.split(KEY_CHARACTER))
-	var result = assigningShuffled(elems)
+	var ultimoEstadoJugadorPartida = lastsInverse(turnos)
+	var jugadoresRandomized = shuffle(jugadores)
+	var partidasPorAsignar = partidas.slice()
+	var result = {}
+	for (var i = 0; i < jugadoresRandomized.length; i++) {
+		var asignandoJugador = jugadoresRandomized[i]
+		var partidas_filtradas_y_random = shuffle(partidasPorAsignar.filter(function(p){return p!= ultimoEstadoJugadorPartida[asignandoJugador]}))
+		result['Jugador '+asignandoJugador] = 'git checkout '+partidas_filtradas_y_random[0]
+		partidasPorAsignar = partidasPorAsignar.slice(1) //remove first partida
+	}
 	var arrayToPrint = randomize_aux.objectToListToPrint(result)
 	answer.attachments[0].text = randomize_aux.printList(arrayToPrint)
 	res.send(answer)

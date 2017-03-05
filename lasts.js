@@ -12,3 +12,13 @@ function lasts(turnos) {
 }
 
 exports.lasts = lasts;
+
+function lastsInverse(turnos) {
+  var lastsInverse = {}
+  for (var partida in turnos){
+   lastsInverse[turnos[partida][turnos[partida].length-1]] = partida
+  }
+  return lastsInverse
+}
+
+exports.lastsInverse = lastsInverse;
