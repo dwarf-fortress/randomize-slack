@@ -81,7 +81,7 @@ function randomizeAndAssign (req, res) {
 		//remove
 		var index = partidasPorAsignar.indexOf(partidas_filtradas_y_random[0])
 		answer.attachments[0].text += "\n"+'index: '+JSON.stringify(index)
-		partidasPorAsignar.slice(index,1) //remove first partida
+		partidasPorAsignar.splice(index,1) //remove partida asignada
 		answer.attachments[0].text += "\n"+'partidasPorAsignar: '+JSON.stringify(partidasPorAsignar)
 	}
 	var arrayToPrint = randomize_aux.objectToListToPrint(result)
